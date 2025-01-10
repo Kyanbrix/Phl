@@ -1,6 +1,6 @@
 package database;
 
-import com.github.Kyanbrix.Main;
+import com.github.kyanbrix.Main;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

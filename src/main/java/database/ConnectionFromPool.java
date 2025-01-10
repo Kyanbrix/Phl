@@ -1,5 +1,6 @@
 package database;
 
+import com.github.kyanbrix.config.Discord;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -12,11 +13,10 @@ public class ConnectionFromPool {
 
     public ConnectionFromPool() {
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl("");
-        config.setUsername("");
-        config.setPassword("");
+        config.setJdbcUrl(Discord.URL());
+        config.setUsername(Discord.username());
+        config.setPassword(Discord.password());
         config.setMaximumPoolSize(1);
-        config.setDriverClassName("");
 
         dataSource = new HikariDataSource(config);
     }

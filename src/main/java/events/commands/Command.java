@@ -8,7 +8,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.interactions.components.buttons.ButtonStyle;
 import org.jetbrains.annotations.NotNull;
-import utilities.Config;
+import utilities.Constant;
 
 import java.awt.*;
 import java.util.concurrent.TimeUnit;
@@ -37,7 +37,7 @@ public abstract class Command {
     }
 
     protected void send_embed(MessageChannelUnion channelUnion, EmbedBuilder builder){
-        channelUnion.sendMessageEmbeds(builder.setColor(Color.decode(Config.default_color)).build()).queue();
+        channelUnion.sendMessageEmbeds(builder.setColor(Color.decode(Constant.default_color)).build()).queue();
     }
 
     protected void addReaction(Message message){

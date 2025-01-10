@@ -11,7 +11,7 @@ import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.interactions.components.buttons.ButtonStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import utilities.Config;
+import utilities.Constant;
 import utilities.GuildConfig;
 
 import java.awt.*;
@@ -45,7 +45,7 @@ public class AcceptButton implements IButton {
 
                 MessageEmbed embed = new EmbedBuilder()
                         .setAuthor(member.getUser().getName(),null,member.getEffectiveAvatarUrl())
-                        .setColor(Color.decode(Config.default_color))
+                        .setColor(Color.decode(Constant.default_color))
                         .addField("User",member.getAsMention(),false)
                         .addField("AQW IGN","https://account.aq.com/CharPage?id="+(ign.contains(" ") ? ign.replace(" ","%20") : ign),false)
                         .addField("Status","Approved",false)

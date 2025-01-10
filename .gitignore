@@ -8,6 +8,7 @@ target/
 .idea/jarRepositories.xml
 .idea/compiler.xml
 .idea/libraries/
+src/main/resources/config.json
 *.iws
 *.iml
 *.ipr

@@ -5,7 +5,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import utilities.Config;
+import utilities.Constant;
 
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -26,7 +26,7 @@ public class Registry extends ListenerAdapter {
 
         if (event.getAuthor().isBot() || !event.isFromGuild()) return;
 
-        final String prefix = Config.prefix;
+        final String prefix = Constant.prefix;
         String message = event.getMessage().getContentRaw().toLowerCase();
 
         if (event.getMessage().getContentRaw().startsWith(prefix)) {

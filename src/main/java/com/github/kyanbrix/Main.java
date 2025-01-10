@@ -1,5 +1,6 @@
-package com.github.Kyanbrix;
+package com.github.kyanbrix;
 
+import com.github.kyanbrix.config.Discord;
 import database.ConnectionFromPool;
 import events.buttons.ButtonManager;
 import events.commands.Registry;
@@ -52,7 +53,7 @@ public class Main {
         connectionFromPool = new ConnectionFromPool();
         shutdown();
 
-        jda = JDABuilder.createLight("DISCORD_TOKEN",intents())
+        jda = JDABuilder.createLight(Discord.TOKEN(),intents())
                 .setMemberCachePolicy(MemberCachePolicy.NONE.or(member -> !member.getUser().isBot()))
                 .setChunkingFilter(ChunkingFilter.NONE)
                 .setAutoReconnect(true)
@@ -64,17 +65,11 @@ public class Main {
 
     }
 
-
-
-
-
-
     public static void main(String[] args) {
 
         new Main();
 
     }
-
 
     private void shutdown() {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {

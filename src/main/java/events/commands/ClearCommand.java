@@ -4,7 +4,7 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import utilities.Config;
+import utilities.Constant;
 import utilities.GuildConfig;
 
 import java.util.concurrent.TimeUnit;
@@ -48,7 +48,7 @@ public class ClearCommand extends Command{
     }
     private String remove_prefix(String message) {
 
-        String content = message.substring(Config.prefix.length() + getName().length());
+        String content = message.substring(Constant.prefix.length() + getName().length());
 
         if (content.startsWith(" ")) content = content.substring(1);
 

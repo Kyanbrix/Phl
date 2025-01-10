@@ -1,6 +1,6 @@
 package utilities
 
-import com.github.Kyanbrix.Main
+import com.github.kyanbrix.Main
 import net.dv8tion.jda.api.entities.Member
 
 object GuildConfig {
