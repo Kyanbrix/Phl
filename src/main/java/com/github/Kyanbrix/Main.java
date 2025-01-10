@@ -1,17 +1,90 @@
 package com.github.Kyanbrix;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+import database.ConnectionFromPool;
+import events.buttons.ButtonManager;
+import events.commands.Registry;
+import listeners.SpamListener;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.requests.GatewayIntent;
+import net.dv8tion.jda.api.utils.ChunkingFilter;
+import net.dv8tion.jda.api.utils.MemberCachePolicy;
+import net.dv8tion.jda.api.utils.cache.CacheFlag;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+import java.util.EnumSet;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+
+public class Main {
+
+
+    private static final Logger log = LoggerFactory.getLogger(Main.class);
+    private static Main instance;
+    private final ConnectionFromPool connectionFromPool;
+    private final JDA jda;
+
+    public ScheduledExecutorService getScheduledExecutorService() {
+        return scheduledExecutorService;
+    }
+
+    private final ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors());
+
+    public JDA getJda() {
+        return jda;
+    }
+    public ConnectionFromPool getConnectionFromPool() {
+        return connectionFromPool;
+    }
+
+    public static Main getInstance() {
+        return instance;
+    }
+
+    private EnumSet<GatewayIntent> intents() {
+        return EnumSet.of(GatewayIntent.GUILD_MEMBERS,GatewayIntent.GUILD_MESSAGES,GatewayIntent.MESSAGE_CONTENT,GatewayIntent.DIRECT_MESSAGES);
+    }
+
+
+    public Main() {
+        instance = this;
+        connectionFromPool = new ConnectionFromPool();
+        shutdown();
+
+        jda = JDABuilder.createLight("DISCORD_TOKEN",intents())
+                .setMemberCachePolicy(MemberCachePolicy.NONE.or(member -> !member.getUser().isBot()))
+                .setChunkingFilter(ChunkingFilter.NONE)
+                .setAutoReconnect(true)
+                .disableCache(EnumSet.allOf(CacheFlag.class))
+                .setEnableShutdownHook(false)
+                .addEventListeners(new ButtonManager(), new SpamListener(),new Registry())
+                .build();
+
+
+    }
+
+
+
+
+
+
+    public static void main(String[] args) {
+
+        new Main();
+
+    }
+
+
+    private void shutdown() {
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+
+            getJda().shutdown();
+            Main.getInstance().getConnectionFromPool().closeConnection();
+
+            log.info("JDA is shutdown!");
+
+
+        }));
     }
 }
