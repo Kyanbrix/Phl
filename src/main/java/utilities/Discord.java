@@ -6,7 +6,7 @@ public class Discord {
 
     private static final Dotenv dotenv = Dotenv.
             configure()
-            .directory("src/main/java/assets")
+            .directory("./")
             .filename(".env")
             .load();
 

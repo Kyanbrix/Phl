@@ -1,5 +1,7 @@
 package com.github.kyanbrix;
 
+import events.buttons.AcceptButton;
+import events.buttons.DenyButton;
 import utilities.Discord;
 import database.ConnectionFromPool;
 import events.buttons.ButtonManager;
@@ -54,13 +56,17 @@ public class Main {
         connectionFromPool = new ConnectionFromPool();
         shutdown();
 
+        var buttonManager = new ButtonManager();
+        buttonManager.addButtons(new DenyButton(), new AcceptButton());
+
         jda = JDABuilder.createLight(Discord.TOKEN(),intents())
                 .setMemberCachePolicy(MemberCachePolicy.NONE.or(member -> !member.getUser().isBot()))
                 .setChunkingFilter(ChunkingFilter.NONE)
                 .setAutoReconnect(true)
                 .disableCache(EnumSet.allOf(CacheFlag.class))
                 .setEnableShutdownHook(false)
-                .addEventListeners(new ButtonManager(), new SpamListener(),new Registry())
+                .addEventListeners(buttonManager)
+                .addEventListeners(new SpamListener(),new Registry())
                 .build();
 
 
