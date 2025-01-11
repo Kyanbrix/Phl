@@ -3,6 +3,7 @@ package database;
 import com.github.kyanbrix.Main;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public class SQLBuilder {
     private Connection connection;
     private final List<Object> params = new ArrayList<>();
     private final String sqlString;
-
+    private PreparedStatement preparedStatement;
 
     public SQLBuilder(String sqlString) {
         this.sqlString = sqlString;
