@@ -12,13 +12,6 @@ public class ButtonManager extends ListenerAdapter {
     private final Map<String, IButton> buttons = new HashMap<>();
 
 
-    public ButtonManager() {
-
-        this.addButtons(new AcceptButton());
-
-    }
-
-
     @Override
     public void onButtonInteraction(@NotNull ButtonInteractionEvent event) {
 
@@ -34,13 +27,14 @@ public class ButtonManager extends ListenerAdapter {
         button.execute(event);
     }
 
-    public void addButtons(IButton iButton)
-    {
-        if (iButton.id().contains(" ")) throw new IllegalArgumentException("Button id must not have spaces");
+    public void addButtons(IButton ... iButton) {
 
-        if (buttons.containsKey(iButton.id())) throw new IllegalArgumentException("Duplicate button id");
+        for (IButton b : iButton) {
 
-        this.buttons.put(iButton.id(),iButton);
+            if (buttons.containsKey(b.id())) throw new RuntimeException("Duplicate Button ID");
+
+            this.buttons.put(b.id(),b);
+        }
 
 
     }
