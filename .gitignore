@@ -2,7 +2,6 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-src/main/resources/config.json
 
 
 ### IntelliJ IDEA ###
@@ -13,6 +12,7 @@ src/main/resources/config.json
 *.iws
 *.iml
 *.ipr
+src/main/java/assets/.env
 
 ### Eclipse ###
 .apt_generated

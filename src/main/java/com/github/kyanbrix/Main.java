@@ -1,6 +1,6 @@
 package com.github.kyanbrix;
 
-import com.github.kyanbrix.config.Discord;
+import utilities.Discord;
 import database.ConnectionFromPool;
 import events.buttons.ButtonManager;
 import events.commands.Registry;
@@ -29,6 +29,7 @@ public class Main {
     public ScheduledExecutorService getScheduledExecutorService() {
         return scheduledExecutorService;
     }
+
 
     private final ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors());
 
