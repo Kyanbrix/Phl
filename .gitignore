@@ -12,7 +12,7 @@ target/
 *.iws
 *.iml
 *.ipr
-src/main/java/assets/.env
+src/main/java/assets/*
 
 ### Eclipse ###
 .apt_generated
