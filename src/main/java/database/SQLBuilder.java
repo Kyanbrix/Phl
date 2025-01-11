@@ -1,6 +1,8 @@
 package database;
 
 import com.github.kyanbrix.Main;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,14 +13,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SQLBuilder {
-    private Connection connection;
+    private static final Logger log = LoggerFactory.getLogger(SQLBuilder.class);
     private final List<Object> params = new ArrayList<>();
+    private Connection connection;
     private final String sqlString;
-    private PreparedStatement preparedStatement;
 
     public SQLBuilder(String sqlString) {
         this.sqlString = sqlString;
-
     }
 
     public SQLBuilder(Connection connection , String sqlString) {
@@ -32,6 +33,7 @@ public class SQLBuilder {
     }
 
     public SQLBuilder addParameters(Object ... objects) {
+
         this.params.addAll(Arrays.asList(objects));
         return this;
     }
@@ -43,7 +45,6 @@ public class SQLBuilder {
         try (var ps = con.prepareStatement(sqlString)) {
 
             if (!params.isEmpty()) {
-
                 int i = 1;
 
                 for (Object o : params) {
@@ -52,12 +53,8 @@ public class SQLBuilder {
                 }
             }
 
-            return executeUpdate();
-
+            return ps.executeUpdate();
         }
-
-
-
 
     }
 
@@ -70,7 +67,6 @@ public class SQLBuilder {
         try (var ps = con.prepareStatement(sqlString)) {
 
             if (!params.isEmpty()) {
-
                 int i = 1;
 
                 for (Object o : params) {
@@ -79,7 +75,7 @@ public class SQLBuilder {
                 }
             }
 
-            return executeQuery();
+            return ps.executeQuery();
         }
 
     }
