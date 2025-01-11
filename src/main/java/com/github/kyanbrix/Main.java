@@ -2,6 +2,8 @@ package com.github.kyanbrix;
 
 import events.buttons.AcceptButton;
 import events.buttons.DenyButton;
+import listeners.Counting;
+import listeners.GuildMembers;
 import utilities.Discord;
 import database.ConnectionFromPool;
 import events.buttons.ButtonManager;
@@ -66,7 +68,7 @@ public class Main {
                 .disableCache(EnumSet.allOf(CacheFlag.class))
                 .setEnableShutdownHook(false)
                 .addEventListeners(buttonManager)
-                .addEventListeners(new SpamListener(),new Registry())
+                .addEventListeners(new SpamListener(),new Registry(), new Counting(), new Counting(), new GuildMembers())
                 .build();
 
 
