@@ -12,7 +12,7 @@ import net.dv8tion.jda.api.interactions.components.buttons.ButtonStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import utilities.Constant;
-import utilities.GuildConfig;
+import config.GuildConfig;
 
 import java.awt.*;
 import java.sql.ResultSet;

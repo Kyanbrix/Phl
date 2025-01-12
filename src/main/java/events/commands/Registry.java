@@ -18,6 +18,8 @@ public class Registry extends ListenerAdapter {
     public Registry() {
         this.addCommands(new MemoryUsed());
         this.addCommands(new ClearCommand());
+        this.addCommands(new BannerCommand());
+        this.addCommands(new AvatarCommand());
     }
 
 

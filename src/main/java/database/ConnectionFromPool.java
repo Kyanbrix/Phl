@@ -1,6 +1,6 @@
 package database;
 
-import utilities.Discord;
+import config.Discord;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 

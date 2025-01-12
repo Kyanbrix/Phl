@@ -4,7 +4,7 @@ import events.buttons.AcceptButton;
 import events.buttons.DenyButton;
 import listeners.Counting;
 import listeners.GuildMembers;
-import utilities.Discord;
+import config.Discord;
 import database.ConnectionFromPool;
 import events.buttons.ButtonManager;
 import events.commands.Registry;

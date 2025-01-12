@@ -5,7 +5,7 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import utilities.Constant;
-import utilities.GuildConfig;
+import config.GuildConfig;
 
 import java.util.concurrent.TimeUnit;
 

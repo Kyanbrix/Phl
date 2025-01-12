@@ -5,7 +5,7 @@ import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
-import utilities.GuildConfig;
+import config.GuildConfig;
 
 import java.util.concurrent.TimeUnit;
 
@@ -13,7 +13,7 @@ public class SpamListener extends ListenerAdapter {
     @Override
     public void onMessageReceived(@NotNull MessageReceivedEvent event) {
 
-        if (event.getAuthor().getIdLong() == GuildConfig.INSTANCE.getOWNER_ID() || event.getAuthor().isBot() || !event.isFromGuild()) return;
+        if (event.getAuthor().getIdLong() == GuildConfig.OWNER_ID || event.getAuthor().isBot() || !event.isFromGuild()) return;
 
         MessageChannel channel = event.getChannel();
 

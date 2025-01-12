@@ -1,10 +1,10 @@
-package utilities
+package config
 
 import com.github.kyanbrix.Main
 import net.dv8tion.jda.api.entities.Member
 
 object GuildConfig {
-    val OWNER_ID : Long = 683613536823279794
+    const val OWNER_ID : Long = 683613536823279794
     private const val STAFF_ROLE : Long = 1308529359765766294
     private const val MUTE_ROLE : Long = 1315995856029093918
     const val ALLOWLISTED_ROLE : Long = 1231288565950972017
