@@ -40,8 +40,9 @@ public class SQLBuilder {
 
     public int executeUpdate() throws SQLException {
 
-        try (Connection c = connection == null ? Main.getInstance().getConnectionFromPool().getConnection() : connection) {
-            var ps = c.prepareStatement(sqlString);
+        connection = connection == null ? Main.getInstance().getConnectionFromPool().getConnection() : connection;
+
+        try (var ps = connection.prepareStatement(sqlString)) {
 
             if (!params.isEmpty()) {
                 int i = 1;
@@ -69,8 +70,7 @@ public class SQLBuilder {
 
         connection = Main.getInstance().getConnectionFromPool().getConnection();
 
-        var ps = connection.prepareStatement(sqlString);
-
+        try (var ps = connection.prepareStatement(sqlString)){
             if (!params.isEmpty()) {
                 int i = 1;
 
@@ -80,21 +80,16 @@ public class SQLBuilder {
                 }
             }
 
-        return ps.executeQuery();
+            return ps.executeQuery();
 
-    }
+        } finally {
 
+            if (closeConnection) {
+                Utils.closeables(connection);
+            }
 
-    public void close() {
-
-        try {
-
-            connection.close();
-
-        }catch (SQLException e) {
-
-            throw new RuntimeException(e);
         }
+
 
 
     }
