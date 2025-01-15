@@ -8,6 +8,7 @@ import config.Discord;
 import database.ConnectionFromPool;
 import events.buttons.ButtonManager;
 import events.commands.Registry;
+import listeners.ServerMessages;
 import listeners.SpamListener;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -29,6 +30,7 @@ public class Main {
     private static Main instance;
     private final ConnectionFromPool connectionFromPool;
     private final JDA jda;
+    private Boolean isSpying = false;
 
     public ScheduledExecutorService getScheduledExecutorService() {
         return scheduledExecutorService;
@@ -46,6 +48,14 @@ public class Main {
 
     public static Main getInstance() {
         return instance;
+    }
+
+    public Boolean getSpying() {
+        return isSpying;
+    }
+
+    public void setSpying(Boolean spying) {
+        isSpying = spying;
     }
 
     private EnumSet<GatewayIntent> intents() {
@@ -68,7 +78,7 @@ public class Main {
                 .disableCache(EnumSet.allOf(CacheFlag.class))
                 .setEnableShutdownHook(false)
                 .addEventListeners(buttonManager)
-                .addEventListeners(new SpamListener(),new Registry(), new Counting(), new Counting(), new GuildMembers())
+                .addEventListeners(new SpamListener(),new Registry(), new Counting(), new Counting(), new GuildMembers(), new ServerMessages())
                 .build();
 
 

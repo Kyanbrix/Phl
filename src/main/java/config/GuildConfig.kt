@@ -10,6 +10,7 @@ object GuildConfig {
     const val ALLOWLISTED_ROLE : Long = 1231288565950972017
     val BLOCKED_CHANNELS : List<Long> = listOf(942957845522047037,939972627173359708,939972980249886821,1309128784372568065)
 
+
     fun isOwner(id : Long) : Boolean {
         return id == OWNER_ID
     }
@@ -21,6 +22,9 @@ object GuildConfig {
     fun isMute(member: Member) : Boolean {
         return member.roles.contains(Main.getInstance().jda.getRoleById(MUTE_ROLE))
     }
+
+
+
 
 
 }

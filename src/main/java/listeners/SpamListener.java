@@ -1,5 +1,6 @@
 package listeners;
 
+import com.github.kyanbrix.Main;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -12,6 +13,8 @@ import java.util.concurrent.TimeUnit;
 public class SpamListener extends ListenerAdapter {
     @Override
     public void onMessageReceived(@NotNull MessageReceivedEvent event) {
+
+        if (!Main.getInstance().getSpying()) return;
 
         if (event.getAuthor().getIdLong() == GuildConfig.OWNER_ID || event.getAuthor().isBot() || !event.isFromGuild()) return;
 

@@ -20,6 +20,7 @@ public class Registry extends ListenerAdapter {
         this.addCommands(new ClearCommand());
         this.addCommands(new BannerCommand());
         this.addCommands(new AvatarCommand());
+        this.addCommands(new SpamConfigCommand());
     }
 
 
