@@ -13,10 +13,10 @@ public class ConnectionFromPool {
 
     public ConnectionFromPool() {
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl(Discord.URL());
+        config.setJdbcUrl(Discord.url());
         config.setUsername(Discord.username());
         config.setPassword(Discord.password());
-        config.setMaximumPoolSize(1);
+        config.setMaximumPoolSize(6);
 
         dataSource = new HikariDataSource(config);
     }
