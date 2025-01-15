@@ -224,6 +224,11 @@ public class BannerCommand extends Command{
         return "banner";
     }
 
+    @Override
+    public String[] getAliases() {
+        return new String[]{"bg","background"};
+    }
+
     private String removePrefix(String message) {
 
         return message.substring(Constant.prefix.length() + getName().length()).strip();
